@@ -8,8 +8,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.6",
+    "@apollo/protobufjs": "^1.2.2",
+    "@graphql-tools/schema": "^8.3.1",
+    "@graphql-tools/utils": "^8.5.5",
+    "@prisma/client": "^3.7.0",
+    "@types/micro-cors": "^0.1.2",
     "apollo-server": "^3.5.0",
+    "apollo-server-micro": "^3.5.0",
     "graphql": "^15.8.0",
+    "micro-cors": "^0.1.1",
+    "mime-db": "^1.51.0",
     "next": "12.0.7",
     "react": "17.0.2",
     "react-dom": "17.0.2"
