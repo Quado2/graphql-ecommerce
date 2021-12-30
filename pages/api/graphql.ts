@@ -3,6 +3,7 @@ import { typeDefs } from "../../graphql/schema";
 import {Query} from "../../graphql/resolvers/Query";
 import {Category } from "../../graphql/resolvers/Category";
 import {Product} from "../../graphql/resolvers/Product";
+import {products, links, categories,reviews} from '../../graphql/db'
 import Cors from "micro-cors";
 
 const cors = Cors();
@@ -13,7 +14,11 @@ const apolloServer = new ApolloServer({
 		Query,
 		Category,
 		Product,
+    
 	},
+  context:{
+    products,links,categories,reviews,
+  }
 });
 
 const startServer = apolloServer.start();
