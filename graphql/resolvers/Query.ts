@@ -1,4 +1,4 @@
-import { categories, links, products } from "../db";
+import { filterProducts, Product, Review, Filter, Category } from "../util";
 
 // export const Query = {
 //   links: () => links,
@@ -20,26 +20,35 @@ import { categories, links, products } from "../db";
 // }
 
 export const Query = {
-	links: () => links,
-	products: () => products,
 	ages: () => [65, 2389, 234],
 	isCool: () => false,
 
+	products: (
+		parent: any,
+		{ filter }: { filter: Filter },
+		{ products, reviews }: { products: Product[]; reviews: Review[] }
+	) => {
+		return filterProducts(filter, products, reviews);
+	},
+
 	product: (
 		parent: any,
-		{ id }: { id: any },
-		{ products }: { products: any }
+		{ id }: { id: String },
+		{ products }: { products: Product[] }
 	) => {
-		return products.find((product: any) => product.id === id);
+		return products.find((product: Product) => product.id === id);
 	},
-	categories: (parent: any, args: any, { categories }: { categories: any }) =>
-		categories,
+	categories: (
+		parent: any,
+		args: any,
+		{ categories }: { categories: Category[] }
+	) => categories,
 
 	category: (
 		parent: any,
 		{ id }: { id: String },
-		{ categories }: { categories: any }
+		{ categories }: { categories: Category[] }
 	) => {
-		return categories.find((category: any) => category.id === id);
+		return categories.find((category: Category) => category.id === id);
 	},
 };

@@ -26,14 +26,14 @@ export const typeDefs = gql`
 	type Category {
 		id: ID!
 		name: String!
-		products: [Product!]!
+		products(filter:ProductsFilterInput): [Product!]!
 	}
 
 	type Query {
 		links: [Link]!
 		ages: [Int]
 		isCool: Boolean!
-		products: [Product]!
+		products (filter: ProductsFilterInput): [Product]!
 		product(id: ID!): Product
 		categories: [Category!]!
 		category(id: ID!): Category
@@ -47,4 +47,9 @@ export const typeDefs = gql`
 		comment: String!
 		rating: Int!
 	}
+
+  input ProductsFilterInput {
+    onSale: Boolean
+    averageRating: Int
+  }
 `;
