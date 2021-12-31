@@ -1,6 +1,13 @@
 import { v4 as uuid } from "uuid";
-import { Category, Product, Review, DB, CategoryInput } from "../util";
-import { Category } from "./Category";
+import {
+	Category,
+	Product,
+	Review,
+	DB,
+	CategoryInput,
+	ReviewInput,
+	ProductInput,
+} from "../util";
 
 export const Mutation = {
 	addCategory: (parent: any, { input }: { input: any }, { db }: { db: DB }) => {
@@ -83,12 +90,46 @@ export const Mutation = {
 		return !db.reviews.some((review: Review) => review.id === id);
 	},
 
-  updateCategory:(parent:any, {id, input}:{id:String, input:CategoryInput}, {db}:{db:DB}) => {
-    const index = db.categories.findIndex((category:Category)=> category.id === id);
-    db.categories[index] = {
-      ...db.categories[index],
-      ...input,
+	updateCategory: (
+		parent: any,
+		{ id, input }: { id: String; input: CategoryInput },
+		{ db }: { db: DB }
+	): Category|null => {
+		const index = db.categories.findIndex(
+			(category: Category) => category.id === id
+		);
+		if(index === -1) return null
+		db.categories[index] = {
+			...db.categories[index],
+			...input,
+		};
+		return db.categories[index];
+	},
+
+	updateProduct: (
+		parent: any,
+		{ id, input }: { id: String; input: ProductInput },
+		{ db }: { db: DB }
+	): Product|null => {
+		const index = db.products.findIndex((product: Product) => product.id === id);
+    if(index === -1) return null
+		db.products[index] = {
+			...db.products[index],
+			...input,
+		};
+
+		return db.products[index];
+	},
+
+  updateReview:(parent:any, {id, input}:{id:String, input:ReviewInput}, {db}:{db:DB}): Review | null => {
+    const index = db.reviews.findIndex((review: Review) => review.id === id);
+    if(index === -1) return null
+    db.reviews[index] = {
+      ...db.reviews[index],
+      ...input
     }
+
+    return db.reviews[index]    
   }
 
 };

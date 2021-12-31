@@ -11,7 +11,7 @@ export interface Product {
 	price: number;
 	image: String;
 	onSale: Boolean;
-	categoryId: String|null;
+	categoryId: String | null;
 }
 
 export interface Review {
@@ -23,21 +23,36 @@ export interface Review {
 	productId: String;
 }
 
-export interface CategoryInput{
-  name: String;
+export interface CategoryInput {
+	name: String;
+}
+export interface ProductInput {
+	name: String;
+	description: String;
+	quantity: number;
+	price: number;
+	image: String;
+	onSale: Boolean;
+	categoryId: String;
+}
+export interface ReviewInput {
+	productId: String;
+	date: String;
+	title: String;
+	comment: String;
+	rating: number;
 }
 
 export interface Category {
 	id: String;
-	name:  String;
+	name: String;
 }
-export interface DB{
-  categories: Category[];
-  products: Product[];
-  reviews: Review[]
+export interface DB {
+	categories: Category[];
+	products: Product[];
+	reviews: Review[];
 }
 
- 
 export function filterProducts(
 	filter: Filter,
 	products: Product[],
