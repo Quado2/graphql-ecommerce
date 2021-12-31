@@ -68,7 +68,7 @@ const products = [
     description: "Small and delicate spoon",
     quantity: 4266,
     price: 1.33,
-    image: "img-3",
+    image: "img-3", 
     onSale: true,
     categoryId: "c01b1ff4-f894-4ef2-b27a-22aacc2fca70",
   },
@@ -319,5 +319,5 @@ module.exports = {
   categories,
   products,
   reviews,
-  
+
 };
