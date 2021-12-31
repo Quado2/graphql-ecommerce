@@ -19,7 +19,8 @@ export const typeDefs = gql`
 		price: Float!
 		image: String!
 		onSale: Boolean!
-		category: Category!
+		categoryId: String
+		category: Category
 		reviews: [Review!]!
 	}
 
@@ -41,11 +42,14 @@ export const typeDefs = gql`
 
 	type Mutation {
 		addCategory(input: AddCategoryInput!): [Category]
-    addProduct(input: AddProductInput!): [Product]
-    addReview(input: AddReviewInput!): [Review]
-    deleteCategory(id: ID!): Boolean
-	}
+		addProduct(input: AddProductInput!): [Product]
+		addReview(input: AddReviewInput!): [Review]
+		deleteCategory(id: ID!): Boolean
+    deleteProduct(id:ID!):Boolean
+    deleteReview(id:ID!):Boolean
+    updateCategory(id:ID!, input: UpdateCategoryInput!): Category!
 
+	}
 
 	type Review {
 		id: ID!
@@ -60,23 +64,29 @@ export const typeDefs = gql`
 		onSale: Boolean
 		averageRating: Int
 	}
+
 	input AddCategoryInput {
 		name: String
 	}
-  input AddProductInput {
+  input UpdateCategoryInput {
+		name: String
+	}
+
+	input AddProductInput {
 		name: String!
 		description: String!
 		quantity: Int!
 		price: Float!
 		image: String!
 		onSale: Boolean!
-    categoryId: String
-  }
-  input AddReviewInput{
-    productId: String!
+		categoryId: String
+	}
+
+	input AddReviewInput {
+		productId: String!
 		date: String!
 		title: String!
 		comment: String!
 		rating: Int!
-  }
+	}
 `;

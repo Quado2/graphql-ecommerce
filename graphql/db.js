@@ -314,8 +314,7 @@ const reviews = [
   },
 ];
 
-module.exports = {
-  links,
+export const db = {
   categories,
   products,
   reviews,

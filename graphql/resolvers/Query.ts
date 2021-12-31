@@ -1,4 +1,4 @@
-import { filterProducts, Product, Review, Filter, Category } from "../util";
+import { DB, filterProducts, Product, Filter, Category } from "../util";
 
 // export const Query = {
 //   links: () => links,
@@ -24,31 +24,19 @@ export const Query = {
 	isCool: () => false,
 
 	products: (
-		parent: any,
+		_parent: any,
 		{ filter }: { filter: Filter },
-		{ products, reviews }: { products: Product[]; reviews: Review[] }
+		{ db }: { db: DB }
 	) => {
-		return filterProducts(filter, products, reviews);
+		return filterProducts(filter, db.products, db.reviews);
 	},
 
-	product: (
-		parent: any,
-		{ id }: { id: String },
-		{ products }: { products: Product[] }
-	) => {
-		return products.find((product: Product) => product.id === id);
+	product: (parent: any, { id }: { id: String }, { db }: { db: DB }) => {
+		return db.products.find((product: Product) => product.id === id);
 	},
-	categories: (
-		parent: any,
-		args: any,
-		{ categories }: { categories: Category[] }
-	) => categories,
+	categories: (parent: any, args: any, { db }: { db: DB }) => db.categories,
 
-	category: (
-		parent: any,
-		{ id }: { id: String },
-		{ categories }: { categories: Category[] }
-	) => {
-		return categories.find((category: Category) => category.id === id);
+	category: (parent: any, { id }: { id: String }, { db }: { db: DB }) => {
+		return db.categories.find((category: Category) => category.id === id);
 	},
 };

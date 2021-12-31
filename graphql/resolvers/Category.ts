@@ -1,15 +1,14 @@
-import { filterProducts, Product, Review, Filter } from "../util";
+import { filterProducts, Product, Filter, DB } from "../util";
 
 export const Category = {
 	products: (
 		{ id: categoryId }: { id: String },
 		{ filter }: { filter: Filter },
-		{ products, reviews }: { products: Product[]; reviews: Review[] }
+		{ db }: { db: DB }
 	) => {
-		let categoricalFilteredProducts = products.filter(
-			(product: any) => product.categoryId === categoryId
+		let categoricalFilteredProducts = db.products.filter(
+			(product: Product) => product.categoryId === categoryId
 		);
-    return filterProducts(filter,categoricalFilteredProducts,reviews)
-		
+		return filterProducts(filter, categoricalFilteredProducts, db.reviews);
 	},
 };
